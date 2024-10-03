@@ -23,79 +23,46 @@ class Spaceship
         {
             x = 0;
             y = 0;
-            direction = "up";
-            
+
             int _dir = 0; // 0 = up, 1 = right, 2 = down, 3 = left
-            
+
             for (char c : path)
             {
                 c = toupper(c);
+                
+                // Rotate left
                 if (c == 'L') 
                 {
-                    // Rotate left
                     _dir = (_dir + 3) % 4;
                 }
-                else if (c == 'R') {
-                    // Rotate right
+                // Rotate right
+                else if (c == 'R') 
+                {
                     _dir = (_dir + 1) % 4;
                 }
-            }
-            
-            switch (_dir)
-            {
-                case 0:
-                    direction = "up";
-                    break;
-                case 1:
-                    direction = "right";
-                    break;
-                case 2:
-                    direction = "down";
-                    break;
-                case 3:
-                    direction = "left";
-                    break;
-            }
-            
-            for (char c : path)
-            {
                 // Advance
-                if (c == 'A')
+                else if (c == 'A') 
                 {
                     switch (_dir)
                     {
-                        case 0:
-                            y++;
-                            break;
-                        case 1:
-                            x++;
-                            break;
-                        case 2:
-                            y--;
-                            break;
-                        case 3:
-                            x--;
-                            break;
+                        case 0: y--; break; // Move up
+                        case 1: x++; break; // Move right
+                        case 2: y++; break; // Move down
+                        case 3: x--; break; // Move left
                     }
                 }
             }
+
+            // Set final direction string
+            switch (_dir)
+            {
+                case 0: direction = "up"; break;
+                case 1: direction = "right"; break;
+                case 2: direction = "down"; break;
+                case 3: direction = "left"; break;
+            }
             
             position = "{x: " + to_string(x) + ", y: " + to_string(y) + ", direction: " + direction + "}";
-        }
-        
-        int getX()
-        {
-            return x;
-        }
-        
-        int getY()
-        {
-            return y;
-        }
-        
-        string getDirection()
-        {
-            return direction;
         }
         
         string getPosition()
@@ -106,8 +73,20 @@ class Spaceship
 
 int main()
 {
-    Spaceship spaceship("LA");
-    cout << spaceship.getPosition();
-    
+    Spaceship astrochuckler;
+    cout << astrochuckler.getPosition() << endl;
+
+    Spaceship lunacycle("RAALALL");
+    cout << lunacycle.getPosition() << endl;
+
+    Spaceship quirkonaut("AAAARAARLAAAARAAARRAAAALLLA");
+    cout << quirkonaut.getPosition() << endl;
+
+    Spaceship zanyverse("");
+    cout << zanyverse.getPosition() << endl;
+
+    Spaceship cosmocomedy("LAAA");
+    cout << cosmocomedy.getPosition() << endl;
+
     return 0;
 }
